@@ -1,5 +1,6 @@
 import Database.Database;
 import Database.Seeds.MainSeed;
+import UI.MainFrame;
 import Database.Model.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +9,8 @@ public class App {
     public static void main(String[] args) {
         Database db = Database.getInstance();
         MainSeed.seed();
+
+        MainFrame frame = new MainFrame();
 
         Task taskModel = new Task();
         taskModel.update("text = 'Learn Ruby on Rails'", "id=1");
