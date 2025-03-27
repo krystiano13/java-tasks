@@ -15,8 +15,6 @@ public class App {
         Task taskModel = new Task();
         taskModel.update("text = 'Learn Ruby on Rails'", "id=1");
         ResultSet result = taskModel.select("*", "");
-
-        //ResultSet result = db.getQuery("Select * from tasks;");
         
         try {
             while (result.next()) {
