@@ -2,36 +2,30 @@ package UI.Main;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.sql.Array;
 import java.util.List;
 
 import javax.swing.JPanel;
-import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+import javax.swing.Box;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
 import Database.Model.Task;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.sql.ResultSet;
 
 public class Table extends JPanel {
-    JTable jTable;
     String[][] data = {};
     String[] columnNames = {};
 
     public Table() {
-        this.setPreferredSize(new Dimension(200, 100));
-        this.setLayout(new BorderLayout());
-
-        if(this.data.length > 0 && this.columnNames.length > 0) {
-            this.jTable = new JTable(data, columnNames);
-            this.add(jTable, BorderLayout.CENTER);
-        }
-        else {
-            this.jTable = new JTable();
-            this.add(this.jTable);
-        }
+        this.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        this.setBorder(new EmptyBorder(20,20,20,20));
     }
 
     public void showGroups() {
@@ -39,6 +33,8 @@ public class Table extends JPanel {
     }
 
     public void showTasks() {
+        this.removeAll();
+        
         Task tasks = new Task();
         ResultSet result = tasks.select("*", "");
 
@@ -57,14 +53,27 @@ public class Table extends JPanel {
             for (int i = 0; i < tempRows.size(); i++) {
                 this.data[i] = tempRows.get(i);
             }
+        
 
-            if (this.jTable != null) {
-                this.remove(this.jTable);
+            for (String[] item : this.data) {
+                JPanel panel = new JPanel();
+                panel.setLayout(new BorderLayout());
+                panel.setBackground(new Color(210,210,210));
+                panel.setBorder(new EmptyBorder(5,5,5,5));
+                panel.setMinimumSize(new Dimension(850, 100));
+                panel.setMaximumSize(new Dimension(5000, 101));
+                
+                JLabel label = new JLabel();
+                label.setText(item[1]);
+                label.setFont(new Font("Arial", Font.PLAIN ,20));
+                panel.add(label, BorderLayout.CENTER);
+
+                JPanel emptyPanel = new JPanel();
+                emptyPanel.setMaximumSize(new Dimension(5000, 10));
+
+                this.add(panel);
+                this.add(emptyPanel);
             }
-
-            this.jTable = new JTable(this.data, tasks.columns);
-
-            this.add(new JScrollPane(this.jTable), BorderLayout.CENTER); // Dodajemy JScrollPane aby umożliwić przewijanie
 
             this.revalidate();
             this.repaint();
