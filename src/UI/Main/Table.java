@@ -6,9 +6,8 @@ import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 
 import Database.Model.Task;
 
@@ -17,6 +16,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.sql.ResultSet;
 
 public class Table extends JPanel {
@@ -62,11 +62,25 @@ public class Table extends JPanel {
                 panel.setBorder(new EmptyBorder(5,5,5,5));
                 panel.setMinimumSize(new Dimension(850, 100));
                 panel.setMaximumSize(new Dimension(5000, 101));
+
+                JButton deleteButton = new JButton();
+                deleteButton.setText("Delete");
+
+                JButton editButton = new JButton();
+                editButton.setText("Edit");
                 
                 JLabel label = new JLabel();
                 label.setText(item[1]);
                 label.setFont(new Font("Arial", Font.PLAIN ,20));
+
+                JPanel buttonContainer = new JPanel();
+                buttonContainer.setLayout(new GridLayout(1, 2));
+
+                buttonContainer.add(editButton);
+                buttonContainer.add(deleteButton);
+
                 panel.add(label, BorderLayout.CENTER);
+                panel.add(buttonContainer, BorderLayout.EAST);
 
                 JPanel emptyPanel = new JPanel();
                 emptyPanel.setMaximumSize(new Dimension(5000, 10));
