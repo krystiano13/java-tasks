@@ -3,6 +3,8 @@ package UI.Main;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,11 +18,33 @@ public class Sidebar extends JPanel {
     private JButton newGroupButton;
     private JComboBox comboBox;
 
-    public Sidebar() {
-        this.comboBox = new JComboBox(this.tables);
+    public Sidebar(Table table) {
+        this.comboBox = new JComboBox<String>(this.tables);
         this.setPreferredSize(new Dimension(200, 100));
         this.setBackground(new Color(220,220,220));
         this.addCreationButtons();
+
+        this.comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedItem = (String) comboBox.getSelectedItem();
+
+                switch (selectedItem) {
+                    case "Tasks":
+                        table.showTasks();
+                        break;
+                    case "Groups":
+                        table.showGroups();
+                        break;
+                    case "Persons":
+                        table.showPersons();
+                        break;    
+
+                    default:
+                        break;
+                }
+            }
+        });
     }
 
     private void addCreationButtons() {

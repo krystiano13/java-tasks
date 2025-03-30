@@ -18,7 +18,6 @@ public class MainFrame extends JFrame {
     Table table;
 
     public MainFrame() {
-        this.sidebar = new Sidebar();
         this.header = new Header();
         this.table = new Table();
 
@@ -30,7 +29,6 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
 
         this.add(this.header, BorderLayout.NORTH);
-        this.add(this.sidebar, BorderLayout.WEST);
 
         JScrollPane scroller = new JScrollPane(this.table);
         scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -41,6 +39,10 @@ public class MainFrame extends JFrame {
 
         this.table.setVisible(true);
         this.table.setLayout(new BoxLayout(this.table, BoxLayout.Y_AXIS));;
+        
+        this.sidebar = new Sidebar(this.table);
+        this.add(this.sidebar, BorderLayout.WEST);
+        this.table.showTasks();
 
         this.table.revalidate();
         this.table.repaint();

@@ -88,8 +88,13 @@ public class Table extends JPanel {
                 
                 JLabel label = new JLabel();
 
-                if(columns[2] == "last_name") {
-                    label.setText(item[1] + " " + item[2]);
+                if(item.length > 2) {
+                    if(columns[2] == "last_name") {
+                        label.setText(item[1] + " " + item[2]);
+                    }
+                    else {
+                        label.setText(item[1]);
+                    } 
                 }
                 else {
                     label.setText(item[1]);
