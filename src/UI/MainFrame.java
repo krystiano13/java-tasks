@@ -40,9 +40,7 @@ public class MainFrame extends JFrame {
         this.getContentPane().add(scroller, BorderLayout.CENTER);
 
         this.table.setVisible(true);
-        this.table.setLayout(new BoxLayout(this.table, BoxLayout.Y_AXIS));
-        //this.table.showTasks();
-        this.table.showPersons();
+        this.table.setLayout(new BoxLayout(this.table, BoxLayout.Y_AXIS));;
 
         this.table.revalidate();
         this.table.repaint();
