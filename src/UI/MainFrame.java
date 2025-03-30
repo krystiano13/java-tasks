@@ -3,7 +3,6 @@ package UI;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.border.Border;
 
 import UI.Main.Header;
 import UI.Main.Sidebar;
@@ -11,7 +10,6 @@ import UI.Main.Table;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 
 public class MainFrame extends JFrame {
     Dimension minSize;
@@ -43,7 +41,8 @@ public class MainFrame extends JFrame {
 
         this.table.setVisible(true);
         this.table.setLayout(new BoxLayout(this.table, BoxLayout.Y_AXIS));
-        this.table.showTasks();
+        //this.table.showTasks();
+        this.table.showPersons();
 
         this.table.revalidate();
         this.table.repaint();

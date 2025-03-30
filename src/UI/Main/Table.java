@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import Database.Model.Group;
+import Database.Model.Person;
 import Database.Model.Task;
 
 import java.awt.BorderLayout;
@@ -29,7 +31,11 @@ public class Table extends JPanel {
     }
 
     public void showGroups() {
+        this.removeAll();
 
+        Group groups = new Group();
+        ResultSet result = groups.select("*", "");
+        this.renderResult(result, groups.columns);
     }
 
     public void showTasks() {
@@ -37,19 +43,30 @@ public class Table extends JPanel {
         
         Task tasks = new Task();
         ResultSet result = tasks.select("*", "");
+        this.renderResult(result, tasks.columns);
+    }
 
+    public void showPersons() {
+        this.removeAll();
+
+        Person persons = new Person();
+        ResultSet result = persons.select("*", "");
+        this.renderResult(result, persons.columns);
+    }
+
+    private void renderResult(ResultSet result, String[] columns) {
         try {
             List<String[]> tempRows = new ArrayList<>();
 
             while (result.next()) {
-                String[] rowData = new String[tasks.columns.length];
-                for (int col = 0; col < tasks.columns.length; col++) {
-                    rowData[col] = result.getString(tasks.columns[col]);
+                String[] rowData = new String[columns.length];
+                for (int col = 0; col < columns.length; col++) {
+                    rowData[col] = result.getString(columns[col]);
                 }
                 tempRows.add(rowData);
             }
 
-            this.data = new String[tempRows.size()][tasks.columns.length];
+            this.data = new String[tempRows.size()][columns.length];
             for (int i = 0; i < tempRows.size(); i++) {
                 this.data[i] = tempRows.get(i);
             }
@@ -70,7 +87,14 @@ public class Table extends JPanel {
                 editButton.setText("Edit");
                 
                 JLabel label = new JLabel();
-                label.setText(item[1]);
+
+                if(columns[2] == "last_name") {
+                    label.setText(item[1] + " " + item[2]);
+                }
+                else {
+                    label.setText(item[1]);
+                }
+
                 label.setFont(new Font("Arial", Font.PLAIN ,20));
 
                 JPanel buttonContainer = new JPanel();
@@ -95,9 +119,5 @@ public class Table extends JPanel {
         } catch (SQLException e) {
             System.out.println("Błąd podczas pobierania danych z tabeli tasks: " + e.getMessage());
         }
-    }
-
-    public void showPersons() {
-
     }
 }
