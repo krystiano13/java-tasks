@@ -19,11 +19,15 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 
 public class Table extends JPanel {
     String[][] data = {};
     String[] columnNames = {};
+
+    private String currentTable = "Tasks";
 
     public Table() {
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
@@ -36,6 +40,7 @@ public class Table extends JPanel {
         Group groups = new Group();
         ResultSet result = groups.select("*", "");
         this.renderResult(result, groups.columns);
+        this.currentTable = "Groups";
     }
 
     public void showTasks() {
@@ -44,6 +49,7 @@ public class Table extends JPanel {
         Task tasks = new Task();
         ResultSet result = tasks.select("*", "");
         this.renderResult(result, tasks.columns);
+        this.currentTable = "Tasks";
     }
 
     public void showPersons() {
@@ -52,6 +58,7 @@ public class Table extends JPanel {
         Person persons = new Person();
         ResultSet result = persons.select("*", "");
         this.renderResult(result, persons.columns);
+        this.currentTable = "Persons";
     }
 
     private void renderResult(ResultSet result, String[] columns) {
@@ -82,6 +89,34 @@ public class Table extends JPanel {
 
                 JButton deleteButton = new JButton();
                 deleteButton.setText("Delete");
+
+                deleteButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String id = item[0];
+
+                        switch(currentTable) {
+                            case "Tasks":
+                                Task taskModel = new Task();
+                                taskModel.delete(Integer.parseInt(id));
+                                Table.this.showTasks();
+                                break;
+                            case "Persons":
+                                Person personModel = new Person();
+                                personModel.delete(Integer.parseInt(id));
+                                Table.this.showPersons();
+                                break;
+                            case "Groups":
+                                Group groupModel = new Group();
+                                groupModel.delete(Integer.parseInt(id));    
+                                Table.this.showGroups();
+                                break;
+
+                            default:
+                                break;    
+                        }
+                    }
+                });
 
                 JButton editButton = new JButton();
                 editButton.setText("Edit");
