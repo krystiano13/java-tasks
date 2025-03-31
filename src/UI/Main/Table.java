@@ -99,8 +99,12 @@ public class Table extends JPanel {
                 else {
                     label.setText(item[1]);
                 }
+ 
 
                 label.setFont(new Font("Arial", Font.PLAIN ,20));
+
+                JPanel textContainer = new JPanel();
+                textContainer.setLayout(new GridLayout(3, 1));
 
                 JPanel buttonContainer = new JPanel();
                 buttonContainer.setLayout(new GridLayout(1, 2));
@@ -108,7 +112,31 @@ public class Table extends JPanel {
                 buttonContainer.add(editButton);
                 buttonContainer.add(deleteButton);
 
-                panel.add(label, BorderLayout.CENTER);
+                textContainer.add(label, BorderLayout.CENTER);
+
+                if(item.length > 3) {
+                    if(columns[2] == "group_id") {
+                        JLabel groupLabel = new JLabel();
+
+                        Group groupModel = new Group();
+                        ResultSet groupName = groupModel.select("name", "id=" + item[2]);
+
+                        groupLabel.setText("Group: " + groupName.getString(1));
+                        textContainer.add(groupLabel);
+                    }
+
+                    if(columns[3] == "person_id") {
+                        JLabel personLabel = new JLabel();
+
+                        Person personModel = new Person();
+                        ResultSet personName = personModel.select("name, last_name", "id=" + item[3]);
+
+                        personLabel.setText("Person: " + personName.getString(1) + " " + personName.getString(2));
+                        textContainer.add(personLabel);
+                    }
+                }
+
+                panel.add(textContainer, BorderLayout.CENTER);
                 panel.add(buttonContainer, BorderLayout.EAST);
 
                 JPanel emptyPanel = new JPanel();
