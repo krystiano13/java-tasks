@@ -13,7 +13,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 
-public class PersonForm extends JFrame {
+public class GroupForm extends JFrame {
     private Dimension minSize;
     private Dimension maxSize;
 
@@ -22,10 +22,9 @@ public class PersonForm extends JFrame {
 
     //Form Elements
     private JTextField input;
-    private JTextField lastNameInput;
     private JButton submitButton;
 
-    public PersonForm () {
+    public GroupForm () {
         this.minSize = new Dimension(400,719);
         this.maxSize = new Dimension(401, 720);
 
@@ -34,7 +33,7 @@ public class PersonForm extends JFrame {
         this.setLayout(new BorderLayout());
         this.setVisible(true);
 
-        this.title = new JLabel("Add new Person", SwingConstants.CENTER); 
+        this.title = new JLabel("Add new Group", SwingConstants.CENTER); 
         this.title.setBorder(new EmptyBorder(10,10,10,10));
         this.title.setFont(new Font("Arial", Font.PLAIN, 20));
 
@@ -42,23 +41,15 @@ public class PersonForm extends JFrame {
         this.formElements.setLayout(new GridLayout(10,1,5,5));
         this.formElements.setBorder(new EmptyBorder(10,10,10,10));
 
-        JLabel nameLabel = new JLabel("Name");
-        JLabel lastNameLabel = new JLabel("Last Name");
+        JLabel nameLabel = new JLabel("Group Name");
 
         nameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-        lastNameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 
         this.input = new JTextField();
         this.input.setMinimumSize(new Dimension(400, 40));
         this.input.setMaximumSize(new Dimension(2000, 41));
         this.input.setFont(new Font("Arial", Font.PLAIN, 16));
         this.input.setName("Test");
-
-        this.lastNameInput = new JTextField();
-        this.lastNameInput.setMinimumSize(new Dimension(400, 40));
-        this.lastNameInput.setMaximumSize(new Dimension(2000, 41));
-        this.lastNameInput.setFont(new Font("Arial", Font.PLAIN, 16));
-        this.lastNameInput.setName("Test");
 
         this.submitButton = new JButton();
         this.submitButton.setText("Create");
@@ -67,8 +58,6 @@ public class PersonForm extends JFrame {
 
         this.formElements.add(nameLabel);
         this.formElements.add(this.input);
-        this.formElements.add(lastNameLabel);
-        this.formElements.add(this.lastNameInput);
         this.formElements.add(this.submitButton);
         
         this.add(this.title, BorderLayout.NORTH);
