@@ -12,6 +12,11 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import Database.Model.Group;
+
 
 public class GroupForm extends JFrame {
     private Dimension minSize;
@@ -62,5 +67,25 @@ public class GroupForm extends JFrame {
         
         this.add(this.title, BorderLayout.NORTH);
         this.add(this.formElements, BorderLayout.CENTER);
+
+        this.submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GroupForm.this.create(GroupForm.this.input.getText());
+            }
+        });
+    }
+
+    private boolean create(String name) {
+        Group groupModel = new Group();
+
+        try {
+            groupModel.create("'" + name + "'");
+            this.dispose();
+            return true;
+        } catch(Exception exception) {
+            System.out.println(exception.getMessage());
+            return false;
+        }
     }
 }

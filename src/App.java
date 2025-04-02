@@ -15,8 +15,8 @@ public class App {
 
         MainFrame frame = new MainFrame();
         //PersonForm personForm = new PersonForm();
-        //GroupForm groupForm = new GroupForm();
-        TaskForm taskForm = new TaskForm();
+        GroupForm groupForm = new GroupForm();
+        //TaskForm taskForm = new TaskForm();
 
         Task taskModel = new Task();
         taskModel.update("text = 'Learn Ruby on Rails'", "id=1");

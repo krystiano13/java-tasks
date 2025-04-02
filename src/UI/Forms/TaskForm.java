@@ -31,8 +31,8 @@ public class TaskForm extends JFrame {
 
     //Form Elements
     private JTextField input;
-    private JComboBox groupBox;
-    private JComboBox personBox;
+    private JComboBox<String> groupBox;
+    private JComboBox<String> personBox;
     private JButton submitButton;
 
     public TaskForm () {
@@ -79,11 +79,11 @@ public class TaskForm extends JFrame {
         Person personModel = new Person();
         Group groupModel = new Group();
 
-        List groupIds = new ArrayList<String>();
-        List personIds = new ArrayList<String>();
+        List<String> groupIds = new ArrayList<String>();
+        List<String> personIds = new ArrayList<String>();
 
-        List groupNames = new ArrayList<String>();
-        List personNames = new ArrayList<String>();
+        List<String> groupNames = new ArrayList<String>();
+        List<String> personNames = new ArrayList<String>();
 
         try {
             ResultSet groups = groupModel.select("id, name", "");
