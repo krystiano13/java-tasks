@@ -3,6 +3,7 @@ import Database.Seeds.MainSeed;
 import UI.MainFrame;
 import UI.Forms.GroupForm;
 import UI.Forms.PersonForm;
+import UI.Forms.TaskForm;
 import Database.Model.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +15,8 @@ public class App {
 
         MainFrame frame = new MainFrame();
         //PersonForm personForm = new PersonForm();
-        GroupForm groupForm = new GroupForm();
+        //GroupForm groupForm = new GroupForm();
+        TaskForm taskForm = new TaskForm();
 
         Task taskModel = new Task();
         taskModel.update("text = 'Learn Ruby on Rails'", "id=1");
