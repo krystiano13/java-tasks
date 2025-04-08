@@ -8,10 +8,15 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import Database.Model.Person;
+import UI.MainFrame;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PersonForm extends JFrame {
     private boolean editMode;
@@ -79,5 +84,27 @@ public class PersonForm extends JFrame {
         
         this.add(this.title, BorderLayout.NORTH);
         this.add(this.formElements, BorderLayout.CENTER);
+
+        this.submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PersonForm.this.create(PersonForm.this.input.getText(), PersonForm.this.lastNameInput.getText());
+            }
+        });
+    }
+
+    private boolean create(String name, String lastName) {
+        Person personModel = new Person();
+
+        try {
+            personModel.create("'" + name + "'," + "'" + lastName + "'");
+            this.dispose();
+            MainFrame.getInstance().table.showPersons();
+            return true;
+        } catch(Exception exception) {
+            System.out.println(exception.getMessage());
+            return false;
+        }
     }
 }
+
