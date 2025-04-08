@@ -11,6 +11,10 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import UI.Forms.GroupForm;
+import UI.Forms.PersonForm;
+import UI.Forms.TaskForm;
+
 public class Sidebar extends JPanel {
     private String[] tables = { "Tasks", "Groups", "Persons" };
     private JButton newTaskButton;
@@ -23,6 +27,27 @@ public class Sidebar extends JPanel {
         this.setPreferredSize(new Dimension(200, 100));
         this.setBackground(new Color(220,220,220));
         this.addCreationButtons();
+
+        this.newGroupButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               GroupForm gf = new GroupForm(false, -1);
+            }
+        });
+
+        this.newTaskButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               TaskForm tf = new TaskForm(false, 0);
+            }
+        });
+
+        this.newPersonButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               PersonForm pf = new PersonForm(false, 0);
+            }
+        });
 
         this.comboBox.addActionListener(new ActionListener() {
             @Override

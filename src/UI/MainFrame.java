@@ -24,11 +24,14 @@ import java.awt.Dimension;
  * 
  * Minimalne wymiary ramki są ustawione na 1279x719 pikseli.
  */
-public class MainFrame extends JFrame {
+public final class MainFrame extends JFrame {
+    private static MainFrame instance;
+
     Dimension minSize;
     Header header;
     Sidebar sidebar;
-    Table table;
+    
+    public Table table;
 
     public MainFrame() {
         this.header = new Header();
@@ -60,5 +63,12 @@ public class MainFrame extends JFrame {
         this.table.revalidate();
         this.table.repaint();
         this.setSize(1280, 720);
+    }
+
+    public static MainFrame getInstance() {
+        if(instance == null) {
+            instance = new MainFrame();
+        }
+        return instance;
     }
 }

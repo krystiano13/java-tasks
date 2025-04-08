@@ -14,6 +14,9 @@ import java.awt.Font;
 import java.awt.GridLayout;
 
 public class PersonForm extends JFrame {
+    private boolean editMode;
+    private int id;
+
     private Dimension minSize;
     private Dimension maxSize;
 
@@ -25,7 +28,10 @@ public class PersonForm extends JFrame {
     private JTextField lastNameInput;
     private JButton submitButton;
 
-    public PersonForm () {
+    public PersonForm (boolean editMode, int id) {
+        this.editMode = editMode;
+        this.id = id;
+
         this.minSize = new Dimension(400,719);
         this.maxSize = new Dimension(401, 720);
 

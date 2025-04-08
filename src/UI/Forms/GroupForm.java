@@ -16,9 +16,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import Database.Model.Group;
-
+import UI.MainFrame;
 
 public class GroupForm extends JFrame {
+    private boolean editMode;
+    private int id;
+
     private Dimension minSize;
     private Dimension maxSize;
 
@@ -29,7 +32,10 @@ public class GroupForm extends JFrame {
     private JTextField input;
     private JButton submitButton;
 
-    public GroupForm () {
+    public GroupForm (boolean editMode, int id) {
+        this.editMode = editMode;
+        this.id = id;
+
         this.minSize = new Dimension(400,719);
         this.maxSize = new Dimension(401, 720);
 
@@ -82,6 +88,7 @@ public class GroupForm extends JFrame {
         try {
             groupModel.create("'" + name + "'");
             this.dispose();
+            MainFrame.getInstance().table.showGroups();
             return true;
         } catch(Exception exception) {
             System.out.println(exception.getMessage());
