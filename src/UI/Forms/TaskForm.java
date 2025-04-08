@@ -16,11 +16,16 @@ import java.awt.GridLayout;
 
 import Database.Model.Group;
 import Database.Model.Person;
+import Database.Model.Task;
+import UI.MainFrame;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TaskForm extends JFrame {
     private boolean editMode;
@@ -75,7 +80,6 @@ public class TaskForm extends JFrame {
         this.formElements.add(nameLabel);
         this.formElements.add(this.input);
         this.initComboBoxes();
-        this.formElements.add(this.submitButton);
         
         this.add(this.title, BorderLayout.NORTH);
         this.add(this.formElements, BorderLayout.CENTER);
@@ -128,9 +132,40 @@ public class TaskForm extends JFrame {
         this.personBox = new JComboBox<String>(personArray);
         this.groupBox = new JComboBox<String>(groupArray);
 
-        this.formElements.add(personLabel);
-        this.formElements.add(this.personBox);
-        this.formElements.add(groupLabel);
-        this.formElements.add(this.groupBox);
+        if(personArray.length > 0 && groupArray.length > 0) {
+            this.formElements.add(personLabel);
+            this.formElements.add(this.personBox);
+            this.formElements.add(groupLabel);
+            this.formElements.add(this.groupBox);
+            this.formElements.add(this.submitButton);
+        }
+        else {
+            JLabel infoLabel = new JLabel();
+            infoLabel.setText("You need to have at least one person and group to do this");
+            this.formElements.add(infoLabel);
+        }
+
+        this.submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String groupId = groupIds.get(groupBox.getSelectedIndex());
+                String personId = personIds.get(personBox.getSelectedIndex());
+                TaskForm.this.create(TaskForm.this.input.getText(), groupId, personId);
+            }
+        });
+    }
+
+    private boolean create(String name, String groupId, String personId) {
+        Task taskModel = new Task();
+
+        try {
+            taskModel.create("'" + name + "'," + groupId + "," + personId);
+            this.dispose();
+            MainFrame.getInstance().table.showTasks();
+            return true;
+        } catch(Exception exception) {
+            System.out.println(exception.getMessage());
+            return false;
+        }
     }
 }
