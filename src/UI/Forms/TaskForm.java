@@ -79,7 +79,14 @@ public class TaskForm extends JFrame {
         this.input.setName("Test");
 
         this.submitButton = new JButton();
-        this.submitButton.setText("Create");
+        
+        if(this.editMode) {
+            this.submitButton.setText("Update");
+        }
+        else {
+            this.submitButton.setText("Create");
+        }
+
         this.submitButton.setMinimumSize(new Dimension(400, 40));
         this.submitButton.setMaximumSize(new Dimension(2000, 41));
 

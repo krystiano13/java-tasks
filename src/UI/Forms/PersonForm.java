@@ -78,7 +78,14 @@ public class PersonForm extends JFrame {
         this.lastNameInput.setName("Test");
 
         this.submitButton = new JButton();
-        this.submitButton.setText("Create");
+       
+        if(this.editMode) {
+            this.submitButton.setText("Update");
+        }
+        else {
+            this.submitButton.setText("Create");
+        }
+
         this.submitButton.setMinimumSize(new Dimension(400, 40));
         this.submitButton.setMaximumSize(new Dimension(2000, 41));
 
@@ -102,14 +109,27 @@ public class PersonForm extends JFrame {
     private boolean create(String name, String lastName) {
         Person personModel = new Person();
 
-        try {
-            personModel.create("'" + name + "'," + "'" + lastName + "'");
-            this.dispose();
-            MainFrame.getInstance().table.showPersons();
-            return true;
-        } catch(Exception exception) {
-            System.out.println(exception.getMessage());
-            return false;
+        if(this.editMode) {
+            try {
+                personModel.update("name = '" + name + "', last_name = '" + lastName + "'", "id = " + this.id);
+                this.dispose();
+                MainFrame.getInstance().table.showPersons();
+                return true;
+            } catch(Exception exception) {
+                System.out.println(exception.getMessage());
+                return false;
+            }
+        }
+        else {
+            try {
+                personModel.create("'" + name + "'," + "'" + lastName + "'");
+                this.dispose();
+                MainFrame.getInstance().table.showPersons();
+                return true;
+            } catch(Exception exception) {
+                System.out.println(exception.getMessage());
+                return false;
+            }
         }
     }
 }
