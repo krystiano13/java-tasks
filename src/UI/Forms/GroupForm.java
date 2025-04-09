@@ -68,11 +68,6 @@ public class GroupForm extends JFrame {
         this.input.setFont(new Font("Arial", Font.PLAIN, 16));
         this.input.setName("Test");
 
-        if(this.editMode) {
-            Group groupModel = new Group();
-            
-        }
-
         this.submitButton = new JButton();
         this.submitButton.setText("Create");
         this.submitButton.setMinimumSize(new Dimension(400, 40));
@@ -96,14 +91,26 @@ public class GroupForm extends JFrame {
     private boolean create(String name) {
         Group groupModel = new Group();
 
-        try {
-            groupModel.create("'" + name + "'");
-            this.dispose();
-            MainFrame.getInstance().table.showGroups();
-            return true;
-        } catch(Exception exception) {
-            System.out.println(exception.getMessage());
-            return false;
+        if(this.editMode) {
+            try {
+                groupModel.update("name = '" + name + "'", "id = " + this.id);
+                this.dispose();
+                MainFrame.getInstance().table.showGroups();
+                return true;
+            } catch(Exception exception) {
+                System.out.println(exception.getMessage());
+                return false;
+            }
+        } else {
+            try {
+                groupModel.create("'" + name + "'");
+                this.dispose();
+                MainFrame.getInstance().table.showGroups();
+                return true;
+            } catch(Exception exception) {
+                System.out.println(exception.getMessage());
+                return false;
+            }
         }
     }
 }
