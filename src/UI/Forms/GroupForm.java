@@ -44,7 +44,13 @@ public class GroupForm extends JFrame {
         this.setLayout(new BorderLayout());
         this.setVisible(true);
 
-        this.title = new JLabel("Add new Group", SwingConstants.CENTER); 
+        if(this.editMode) {
+            this.title = new JLabel("Edit Group", SwingConstants.CENTER); 
+        }
+        else {
+            this.title = new JLabel("Add new Group", SwingConstants.CENTER); 
+        }
+
         this.title.setBorder(new EmptyBorder(10,10,10,10));
         this.title.setFont(new Font("Arial", Font.PLAIN, 20));
 
@@ -61,6 +67,11 @@ public class GroupForm extends JFrame {
         this.input.setMaximumSize(new Dimension(2000, 41));
         this.input.setFont(new Font("Arial", Font.PLAIN, 16));
         this.input.setName("Test");
+
+        if(this.editMode) {
+            Group groupModel = new Group();
+            
+        }
 
         this.submitButton = new JButton();
         this.submitButton.setText("Create");

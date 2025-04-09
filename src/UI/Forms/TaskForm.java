@@ -55,7 +55,13 @@ public class TaskForm extends JFrame {
         this.setLayout(new BorderLayout());
         this.setVisible(true);
 
-        this.title = new JLabel("Add new Task", SwingConstants.CENTER); 
+        if(this.editMode) {
+            this.title = new JLabel("Edit Task", SwingConstants.CENTER); 
+        }
+        else {
+            this.title = new JLabel("Add new Task", SwingConstants.CENTER); 
+        }
+
         this.title.setBorder(new EmptyBorder(10,10,10,10));
         this.title.setFont(new Font("Arial", Font.PLAIN, 20));
 

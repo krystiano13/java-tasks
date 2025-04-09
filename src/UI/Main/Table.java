@@ -23,6 +23,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 
+import Enums.ETable;
+import UI.Forms.TaskForm;
+import UI.Forms.PersonForm;
+import UI.Forms.GroupForm;
+
 public class Table extends JPanel {
     String[][] data = {};
     String[] columnNames = {};
@@ -39,7 +44,7 @@ public class Table extends JPanel {
 
         Group groups = new Group();
         ResultSet result = groups.select("*", "");
-        this.renderResult(result, groups.columns);
+        this.renderResult(result, groups.columns, ETable.GROUPS);
         this.currentTable = "Groups";
     }
 
@@ -48,7 +53,7 @@ public class Table extends JPanel {
         
         Task tasks = new Task();
         ResultSet result = tasks.select("*", "");
-        this.renderResult(result, tasks.columns);
+        this.renderResult(result, tasks.columns, ETable.TASKS);
         this.currentTable = "Tasks";
     }
 
@@ -57,11 +62,11 @@ public class Table extends JPanel {
 
         Person persons = new Person();
         ResultSet result = persons.select("*", "");
-        this.renderResult(result, persons.columns);
+        this.renderResult(result, persons.columns, ETable.PERSONS);
         this.currentTable = "Persons";
     }
 
-    private void renderResult(ResultSet result, String[] columns) {
+    private void renderResult(ResultSet result, String[] columns, ETable table) {
         try {
             List<String[]> tempRows = new ArrayList<>();
 
@@ -120,6 +125,33 @@ public class Table extends JPanel {
 
                 JButton editButton = new JButton();
                 editButton.setText("Edit");
+
+                switch(table) {
+                    case TASKS:
+                        editButton.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                TaskForm form = new TaskForm(true, Integer.parseInt(item[0]));
+                            }
+                        });
+                        break;
+                    case PERSONS:
+                        editButton.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                PersonForm form = new PersonForm(true, Integer.parseInt(item[0]));
+                            }
+                        });
+                        break;
+                    case GROUPS:
+                        editButton.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                GroupForm form = new GroupForm(true, Integer.parseInt(item[0]));
+                            }
+                        });
+                        break;
+                }
                 
                 JLabel label = new JLabel();
 

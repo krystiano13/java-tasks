@@ -45,7 +45,13 @@ public class PersonForm extends JFrame {
         this.setLayout(new BorderLayout());
         this.setVisible(true);
 
-        this.title = new JLabel("Add new Person", SwingConstants.CENTER); 
+        if(this.editMode) {
+            this.title = new JLabel("Edit Person", SwingConstants.CENTER); 
+        }
+        else {
+            this.title = new JLabel("Add new Person", SwingConstants.CENTER); 
+        }
+
         this.title.setBorder(new EmptyBorder(10,10,10,10));
         this.title.setFont(new Font("Arial", Font.PLAIN, 20));
 
