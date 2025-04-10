@@ -18,7 +18,7 @@ public final class Database {
             this.connection = DriverManager.getConnection(this.url);
             System.out.println("Connected to database !");
         } catch(SQLException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
     }
 
@@ -31,7 +31,7 @@ public final class Database {
             result = stmt.executeQuery(statement);
             return result;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+           // System.out.println(e.getMessage());
         } 
 
         return null;
@@ -45,7 +45,7 @@ public final class Database {
             stmt.executeQuery(statement);
             return true;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         } 
 
         return false;

@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JOptionPane;
 
 import Database.Model.Person;
 import UI.MainFrame;
@@ -109,6 +110,11 @@ public class PersonForm extends JFrame {
     private boolean create(String name, String lastName) {
         Person personModel = new Person();
 
+        if(this.input.getText().trim().isEmpty() || this.lastNameInput.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Fill all fields before submiting", "Warning", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+
         if(this.editMode) {
             try {
                 personModel.update("name = '" + name + "', last_name = '" + lastName + "'", "id = " + this.id);
@@ -116,7 +122,7 @@ public class PersonForm extends JFrame {
                 MainFrame.getInstance().table.showPersons();
                 return true;
             } catch(Exception exception) {
-                System.out.println(exception.getMessage());
+                JOptionPane.showMessageDialog(this, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         }
@@ -127,7 +133,7 @@ public class PersonForm extends JFrame {
                 MainFrame.getInstance().table.showPersons();
                 return true;
             } catch(Exception exception) {
-                System.out.println(exception.getMessage());
+                JOptionPane.showMessageDialog(this, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         }

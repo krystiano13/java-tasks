@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -171,14 +172,32 @@ public class TaskForm extends JFrame {
     private boolean create(String name, String groupId, String personId) {
         Task taskModel = new Task();
 
-        try {
-            taskModel.create("'" + name + "'," + groupId + "," + personId);
-            this.dispose();
-            MainFrame.getInstance().table.showTasks();
-            return true;
-        } catch(Exception exception) {
-            System.out.println(exception.getMessage());
+        if(this.input.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Fill all fields before submiting", "Warning", JOptionPane.WARNING_MESSAGE);
             return false;
+        }
+
+        if(this.editMode) {
+            try {
+                taskModel.update("text = '" + name + "', group_id = " + groupId + ", person_id = " + personId, "id = " + this.id);
+                this.dispose();
+                MainFrame.getInstance().table.showTasks();
+                return true;
+            } catch(Exception exception) {
+                JOptionPane.showMessageDialog(this, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        else {
+            try {
+                taskModel.create("'" + name + "'," + groupId + "," + personId);
+                this.dispose();
+                MainFrame.getInstance().table.showTasks();
+                return true;
+            } catch(Exception exception) {
+                JOptionPane.showMessageDialog(this, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
         }
     }
 }

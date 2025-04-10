@@ -3,6 +3,7 @@ package UI.Forms;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -97,6 +98,11 @@ public class GroupForm extends JFrame {
 
     private boolean create(String name) {
         Group groupModel = new Group();
+
+        if(this.input.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Fill all fields before submiting", "Warning", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
 
         if(this.editMode) {
             try {
