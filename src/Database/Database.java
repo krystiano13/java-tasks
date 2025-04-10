@@ -32,8 +32,6 @@ public final class Database {
         }
     }
 
-    
-    
     /** 
      * Nakładka na select query pozwalająca pobrać rezultat zapytań 
      * @param statement
@@ -56,7 +54,6 @@ public final class Database {
         return null;
     }
 
-    
     /** 
      * Nakładka na polcenia insert, update i delete pozwalająca na sprawdzenie czy 
      * operacja zakończyła się powodzeniem
@@ -78,8 +75,7 @@ public final class Database {
 
         return false;
     }
-
-    
+ 
     /** 
      * Funkcja pozwala na globalny dostęp do instancji klasy Database
      * @return Database
