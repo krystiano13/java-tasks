@@ -10,6 +10,10 @@ import javax.swing.JOptionPane;
 
 import UI.MainFrame;
 
+/**
+ * Klasa z maksymalnie jedną instancją pozwalająca na połączenie się i
+ * wykonywanie operacji na bazie danych
+ */
 public final class Database {
     public Connection connection;
     private static Database instance;
@@ -28,6 +32,13 @@ public final class Database {
         }
     }
 
+    
+    
+    /** 
+     * Nakładka na select query pozwalająca pobrać rezultat zapytań 
+     * @param statement
+     * @return ResultSet
+     */
     public ResultSet getQuery(String statement) {
         Statement stmt;
         ResultSet result;
@@ -45,6 +56,13 @@ public final class Database {
         return null;
     }
 
+    
+    /** 
+     * Nakładka na polcenia insert, update i delete pozwalająca na sprawdzenie czy 
+     * operacja zakończyła się powodzeniem
+     * @param statement
+     * @return boolean
+     */
     public boolean setQuery(String statement) {
         Statement stmt;
 
@@ -61,6 +79,11 @@ public final class Database {
         return false;
     }
 
+    
+    /** 
+     * Funkcja pozwala na globalny dostęp do instancji klasy Database
+     * @return Database
+     */
     public static Database getInstance() {
         if(instance == null) {
             instance = new Database();
