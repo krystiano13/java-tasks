@@ -15,6 +15,9 @@ import UI.Forms.GroupForm;
 import UI.Forms.PersonForm;
 import UI.Forms.TaskForm;
 
+/**
+ * Klasa panelu bocznego UI
+ */
 public class Sidebar extends JPanel {
     private String[] tables = { "Tasks", "Groups", "Persons" };
     private JButton newTaskButton;
@@ -72,6 +75,9 @@ public class Sidebar extends JPanel {
         });
     }
 
+    /**
+     * Funkcja inicjalizuje przyciski dla sidebara
+     */
     private void addCreationButtons() {
         JPanel ButtonWrapper = new JPanel();
 

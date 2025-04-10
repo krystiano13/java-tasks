@@ -9,6 +9,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 
+/**
+ * Klasa odpowiedzialna za stworzenie UI elementu nagłówkowego
+ */
 public class Header extends JPanel {
     JLabel label;
 
@@ -19,6 +22,9 @@ public class Header extends JPanel {
         this.createTitle();
     }
 
+    /**
+     * Funkcja tworzy tytuł dla elementu nagłówkowego
+     */
     private void createTitle() {
         this.label = new JLabel();
         this.label.setText("TASKS APP");

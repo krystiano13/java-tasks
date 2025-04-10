@@ -19,6 +19,10 @@ import java.awt.event.ActionEvent;
 import Database.Model.Group;
 import UI.MainFrame;
 
+/**
+ * Klasa odpowiedzialna za stworzenie formularza, który pozwala na tworzenie
+ * lub edycję grup
+ */
 public class GroupForm extends JFrame {
     private boolean editMode;
     private int id;
@@ -96,6 +100,12 @@ public class GroupForm extends JFrame {
         });
     }
 
+    
+    /** 
+     * Funkcja pozwala na tworzenie lub edycję grupy
+     * @param name
+     * @return boolean
+     */
     private boolean create(String name) {
         Group groupModel = new Group();
 
@@ -111,7 +121,7 @@ public class GroupForm extends JFrame {
                 MainFrame.getInstance().table.showGroups();
                 return true;
             } catch(Exception exception) {
-                System.out.println(exception.getMessage());
+                JOptionPane.showMessageDialog(this, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         } else {
@@ -121,7 +131,7 @@ public class GroupForm extends JFrame {
                 MainFrame.getInstance().table.showGroups();
                 return true;
             } catch(Exception exception) {
-                System.out.println(exception.getMessage());
+                JOptionPane.showMessageDialog(this, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         }

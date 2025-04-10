@@ -13,16 +13,7 @@ import java.awt.Dimension;
 
 /**
  * Główna ramka aplikacji, która zawiera wszystkie komponenty interfejsu użytkownika.
- * Klasa ta jest odpowiedzialna za inicjalizację i organizację elementów UI takich jak
- * nagłówek, pasek boczny i tabela z danymi.
- * 
- * Ramka zawiera:
- * - Header (nagłówek) - wyświetlany na górze aplikacji
- * - Sidebar (pasek boczny) - wyświetlany po lewej stronie, zawiera przyciski do zarządzania danymi
- * - Table (tabela) - główny komponent wyświetlający dane z bazy danych
- * - JScrollPane - zapewnia możliwość przewijania zawartości tabeli
- * 
- * Minimalne wymiary ramki są ustawione na 1279x719 pikseli.
+ * Klasa ta jest odpowiedzialna za inicjalizację i organizację elementów UI
  */
 public final class MainFrame extends JFrame {
     private static MainFrame instance;
@@ -65,6 +56,10 @@ public final class MainFrame extends JFrame {
         this.setSize(1280, 720);
     }
 
+    /** 
+     * Funkcja pozwala na globalny dostęp do głównej ramki
+     * @return MainFrame
+     */
     public static MainFrame getInstance() {
         if(instance == null) {
             instance = new MainFrame();

@@ -9,27 +9,8 @@ import Database.Database;
 public final class MainSeed {
     
     /**
-     * Metoda seed() jest używana do tworzenia tabel w bazie danych.
-     * Tworzy tabele: groups, persons i tasks, jeśli nie istnieją.
-     * 
-     * Tabela groups zawiera:
-     * - id: unikalny identyfikator grupy (INTEGER, PRIMARY KEY, AUTOINCREMENT)
-     * - name: nazwa grupy (VARCHAR(100), NOT NULL)
-     * 
-     * Tabela persons zawiera:
-     * - id: unikalny identyfikator osoby (INTEGER, PRIMARY KEY, AUTOINCREMENT)
-     * - name: imię osoby (VARCHAR(50), NOT NULL)
-     * - last_name: nazwisko osoby (VARCHAR(50), NOT NULL)
-     * 
-     * Tabela tasks zawiera:
-     * - id: unikalny identyfikator zadania (INTEGER, PRIMARY KEY, AUTOINCREMENT)
-     * - text: treść zadania (VARCHAR(255), NOT NULL)
-     * - group_id: identyfikator grupy, do której należy zadanie (INTEGER)
-     * - person_id: identyfikator osoby przypisanej do zadania (INTEGER)
-     * 
-     * Klucze obce:
-     * - group_id odnosi się do id w tabeli groups
-     * - person_id odnosi się do id w tabeli persons
+     * Funkcja seed wywołuje zapytania SQL które tworzą poszczególne tabelki
+     * jeśli te z jakiegoś powodu jeszcze nie istnieją w bazie danych
      */
     public static void seed() {
         try {

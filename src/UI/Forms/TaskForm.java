@@ -28,6 +28,10 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Klasa odpowiedzialna za stworzenie formularza, który pozwala na tworzenie
+ * lub edycję zadań
+ */
 public class TaskForm extends JFrame {
     private boolean editMode;
     private int id;
@@ -99,6 +103,10 @@ public class TaskForm extends JFrame {
         this.add(this.formElements, BorderLayout.CENTER);
     }
 
+    /** 
+    * Funkcja pozwala na stworznie comboboxów z danymi pobranymi 
+    * z tabelek "groups" i "persons"
+    */
     private void initComboBoxes() {
         Person personModel = new Person();
         Group groupModel = new Group();
@@ -169,6 +177,14 @@ public class TaskForm extends JFrame {
         });
     }
 
+    
+    /** 
+     * Funkcja pozwala na stworzenie lub edycję zadań
+     * @param name
+     * @param groupId
+     * @param personId
+     * @return boolean
+     */
     private boolean create(String name, String groupId, String personId) {
         Task taskModel = new Task();
 

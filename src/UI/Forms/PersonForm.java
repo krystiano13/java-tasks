@@ -19,6 +19,10 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Klasa odpowiedzialna za stworzenie formularza, który pozwala na tworzenie
+ * lub edycję osób
+ */
 public class PersonForm extends JFrame {
     private boolean editMode;
     private int id;
@@ -107,6 +111,13 @@ public class PersonForm extends JFrame {
         });
     }
 
+    
+    /** 
+     * Funkcja odpowiedzialna za stworzenie lub edycję osób
+     * @param name
+     * @param lastName
+     * @return boolean
+     */
     private boolean create(String name, String lastName) {
         Person personModel = new Person();
 

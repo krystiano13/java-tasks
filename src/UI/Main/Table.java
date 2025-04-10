@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import Database.Model.Group;
 import Database.Model.Person;
@@ -39,6 +40,10 @@ public class Table extends JPanel {
         this.setBorder(new EmptyBorder(20,20,20,20));
     }
 
+    /**
+     * Funkcja pozwala na załoadowanie danych tabeli "groups" do
+     * wizualnej tabelki
+     */
     public void showGroups() {
         this.removeAll();
 
@@ -48,6 +53,10 @@ public class Table extends JPanel {
         this.currentTable = "Groups";
     }
 
+    /**
+     * Funkcja pozwala na załoadowanie danych tabeli "tasks" do
+     * wizualnej tabelki
+     */
     public void showTasks() {
         this.removeAll();
         
@@ -57,6 +66,10 @@ public class Table extends JPanel {
         this.currentTable = "Tasks";
     }
 
+    /**
+     * Funkcja pozwala na załoadowanie danych tabeli "persons" do
+     * wizualnej tabelki
+     */
     public void showPersons() {
         this.removeAll();
 
@@ -65,7 +78,15 @@ public class Table extends JPanel {
         this.renderResult(result, persons.columns, ETable.PERSONS);
         this.currentTable = "Persons";
     }
-
+    
+    /** 
+     * Funkcja pozwala na konwersję rezultatu zapytania SELECT na tablicę 
+     * wielowymiarową Stringów. Następnie tworzy elementy UI, w których
+     * będą wtłoczone dane z tej włańie tablicy 
+     * @param result
+     * @param columns
+     * @param table
+     */
     private void renderResult(ResultSet result, String[] columns, ETable table) {
         try {
             List<String[]> tempRows = new ArrayList<>();
@@ -217,7 +238,7 @@ public class Table extends JPanel {
             this.repaint();
 
         } catch (SQLException e) {
-            System.out.println("Błąd podczas pobierania danych z tabeli tasks: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
