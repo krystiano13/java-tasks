@@ -6,6 +6,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
+import UI.MainFrame;
+
 public final class Database {
     public Connection connection;
     private static Database instance;
@@ -18,7 +22,9 @@ public final class Database {
             this.connection = DriverManager.getConnection(this.url);
             System.out.println("Connected to database !");
         } catch(SQLException e) {
-            //System.out.println(e.getMessage());
+            if(e.getSQLState() != "SQLITE_DONE") {
+                JOptionPane.showMessageDialog(MainFrame.getInstance(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
@@ -31,7 +37,9 @@ public final class Database {
             result = stmt.executeQuery(statement);
             return result;
         } catch (SQLException e) {
-           // System.out.println(e.getMessage());
+            if(e.getSQLState() != "SQLITE_DONE") {
+                JOptionPane.showMessageDialog(MainFrame.getInstance(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } 
 
         return null;
@@ -45,7 +53,9 @@ public final class Database {
             stmt.executeQuery(statement);
             return true;
         } catch (SQLException e) {
-            //System.out.println(e.getMessage());
+            if(e.getSQLState() != "SQLITE_DONE") {
+                JOptionPane.showMessageDialog(MainFrame.getInstance(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } 
 
         return false;
