@@ -28,7 +28,7 @@ public class Sidebar extends JPanel {
     public Sidebar(Table table) {
         this.comboBox = new JComboBox<String>(this.tables);
         this.setPreferredSize(new Dimension(200, 100));
-        this.setBackground(new Color(220,220,220));
+        //this.setBackground(new Color(220,220,220));
         this.addCreationButtons();
 
         this.newGroupButton.addActionListener(new ActionListener() {
@@ -83,7 +83,7 @@ public class Sidebar extends JPanel {
 
         ButtonWrapper.setLayout(new GridLayout(4,1,5,5));
         ButtonWrapper.setBorder(new EmptyBorder(10,0,0,0));
-        ButtonWrapper.setBackground(new Color(220,220,220));
+        //ButtonWrapper.setBackground(new Color(220,220,220));
 
         this.newTaskButton = new JButton();
         this.newPersonButton = new JButton();

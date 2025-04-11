@@ -18,7 +18,7 @@ public class Header extends JPanel {
     public Header() {
         this.setPreferredSize(new Dimension(200, 80));
         this.setLayout(new BorderLayout());
-        this.setBackground(new Color(220,220,220));
+        //this.setBackground(new Color(220,220,220));
         this.createTitle();
     }
 
