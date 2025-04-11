@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import Database.Database;
 import Database.Model.Group;
 import Database.Model.Person;
 import Database.Model.Task;
@@ -155,11 +156,15 @@ public class Table extends JPanel {
                                 break;
                             case "Persons":
                                 Person personModel = new Person();
+                                Database.getInstance().setQuery("DELETE FROM TASKS WHERE person_id = " + item[0] + ";");
+
                                 personModel.delete(Integer.parseInt(id));
                                 Table.this.showPersons();
                                 break;
                             case "Groups":
-                                Group groupModel = new Group();
+                                Group groupModel = new Group();                           
+                                Database.getInstance().setQuery("DELETE FROM TASKS WHERE group_id = " + item[0] + ";");
+
                                 groupModel.delete(Integer.parseInt(id));    
                                 Table.this.showGroups();
                                 break;
