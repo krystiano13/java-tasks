@@ -5,7 +5,7 @@ package Database.Model;
  * Zawiera metody do operacji na tabeli grup.
  */
 public class Task extends Model {
-    public String[] columns = { "id", "text", "group_id", "person_id" };
+    public String[] columns = { "id", "text", "group_id", "person_id", "done" };
 
     public Task() {
         super();

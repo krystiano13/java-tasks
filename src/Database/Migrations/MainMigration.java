@@ -1,4 +1,4 @@
-package Database.Seeds;
+package Database.Migrations;
 
 import Database.Database;
 
@@ -6,13 +6,13 @@ import Database.Database;
  * Klasa MainSeed jest odpowiedzialna za inicjalizację bazy danych
  * poprzez tworzenie niezbędnych tabel, jeśli jeszcze nie istnieją.
  */
-public final class MainSeed {
+public final class MainMigration {
     
     /**
-     * Funkcja seed wywołuje zapytania SQL które tworzą poszczególne tabelki
+     * Funkcja migrate wywołuje zapytania SQL które tworzą poszczególne tabelki
      * jeśli te z jakiegoś powodu jeszcze nie istnieją w bazie danych
      */
-    public static void seed() {
+    public static void migrate() {
         try {
             Database db = Database.getInstance();
 
@@ -35,6 +35,7 @@ public final class MainSeed {
                 "text VARCHAR(255) NOT NULL," +
                 "group_id INTEGER," +
                 "person_id INTEGER," +
+                "done BOOLEAN," +
                 "FOREIGN KEY (group_id) REFERENCES groups(id)," +
                 "FOREIGN KEY (person_id) REFERENCES persons(id));"
             );

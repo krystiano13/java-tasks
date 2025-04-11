@@ -113,6 +113,32 @@ public class Table extends JPanel {
                 panel.setMinimumSize(new Dimension(850, 100));
                 panel.setMaximumSize(new Dimension(5000, 101));
 
+                JPanel buttonContainer = new JPanel();
+                buttonContainer.setLayout(new GridLayout(1, 2));
+
+                if(item.length > 3) {
+                    if(columns[4] == "done") {
+                        JButton doneButton = new JButton();
+                        doneButton.setText("Done");
+
+                        if(Integer.parseInt(item[4]) == 1) {
+                            panel.setBackground(Color.GREEN);
+                        }
+                        else {
+                            buttonContainer.add(doneButton);
+
+                            doneButton.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    Task taskModel = new Task();
+                                    taskModel.update("done=true", "id = " + item[0]);
+                                    Table.this.showTasks();
+                                } 
+                            });
+                        }
+                    }
+                }
+
                 JButton deleteButton = new JButton();
                 deleteButton.setText("Delete");
 
@@ -194,11 +220,14 @@ public class Table extends JPanel {
                 JPanel textContainer = new JPanel();
                 textContainer.setLayout(new GridLayout(3, 1));
 
-                JPanel buttonContainer = new JPanel();
-                buttonContainer.setLayout(new GridLayout(1, 2));
-
                 buttonContainer.add(editButton);
                 buttonContainer.add(deleteButton);
+
+                if(item.length > 3 && columns[4] == "done") {
+                    if(Integer.parseInt(item[4]) == 1) {
+                        buttonContainer.remove(editButton);
+                    }
+                }
 
                 textContainer.add(label, BorderLayout.CENTER);
 

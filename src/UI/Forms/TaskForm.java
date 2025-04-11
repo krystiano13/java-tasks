@@ -206,7 +206,7 @@ public class TaskForm extends JFrame {
         }
         else {
             try {
-                taskModel.create("'" + name + "'," + groupId + "," + personId);
+                taskModel.create("'" + name + "'," + groupId + "," + personId + ", false");
                 this.dispose();
                 MainFrame.getInstance().table.showTasks();
                 return true;
